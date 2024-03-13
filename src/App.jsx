@@ -1,30 +1,41 @@
-import React from 'react'
+import React, from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Home } from './Pages/Home'
-import { Evenement } from './Pages/Evenement'
-import { Achat } from './Pages/Achat'
-import { Paiement } from './Pages/Paiement'
-import { Confirmation } from './Pages/Confirmation'
+import { Home, ErrorPage, Evenement, Wrapper, Login, Register } from './Pages'
+import Modals from '../components/Modals'
+
+import './index.css'
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/event',
-    element: <Evenement />,
-  },
-  {
-    path: '/achat',
-    element: <Achat />,
-  },
-  {
-    path: '/confirmation',
-    element: <Confirmation />,
-  },
-  {
-    path: '/paiement',
-    element: <Paiement />,
+    element: <Wrapper />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/event',
+        element: <Evenement />,
+      },
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/login',
+        element: (
+          <Modals>
+            <Login />
+          </Modals>
+        ),
+      },
+      {
+        path: '/register',
+        element: (
+          <Modals>
+            <Register />
+          </Modals>
+        ),
+      },
+    ],
   },
 ])
 
